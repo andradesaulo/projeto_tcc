@@ -2,14 +2,10 @@ import 'package:projeto_tcc/pages/login/login_state.dart';
 import 'package:projeto_tcc/repositories/user_repository.dart';
 import 'package:projeto_tcc/repositories/user_repository_mock.dart';
 
-class LoginController {
-  late UserRepository userRepository;
+class LoginController{
+  final UserRepository userRepository = UserRepositoryMock();
   Function(LoginState state)? onListen;
   LoginState state = LoginStateEmpty();
-  
-  LoginController(){
-    this.userRepository = UserRepositoryMock();
-  }
 
   getUser(String nome) async {
     update(LoginStateLoading());

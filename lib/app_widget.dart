@@ -8,6 +8,7 @@ class AppWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      locale: Locale('pt', 'BR'),
       title: "Projeto TCC",
       initialRoute: "/login",
       routes: {

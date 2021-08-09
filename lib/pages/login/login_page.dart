@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_tcc/pages/login/login_controller.dart';
 import 'package:projeto_tcc/pages/login/login_state.dart';
-import 'package:projeto_tcc/shared_widgets/text_field_input.dart';
-import 'package:projeto_tcc/theme/app_theme.dart';
+import 'package:projeto_tcc/shared_widgets/elevated_button_widget.dart';
+import 'package:projeto_tcc/shared_widgets/input_fields/user_form_field_widget.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({ Key? key }) : super(key: key);
@@ -12,7 +12,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  String username = "";
+  final formKey = GlobalKey<FormState>();
   final LoginController controller = LoginController();
 
   @override
@@ -20,6 +20,7 @@ class _LoginPageState extends State<LoginPage> {
     controller.listen((state) {
         if (controller.state is LoginStateSuccess) {
           final user = (controller.state as LoginStateSuccess).user;
+          print("${user.id} + ${user.nome} + ${user.genero} + ${user.dataNasc}");
           Navigator.pushReplacementNamed(
             context, 
             "/meus_pets", 
@@ -41,45 +42,40 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 50),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextFieldInputWidget(
-              label: "Usuário",
-              onChanged: (value) => username = value
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(AppTheme.colors.primary),
-                    ),
-                    onPressed: (){
-                      controller.getUser(username);
-                    }, 
-                    child: Text("Entrar")
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(AppTheme.colors.primaryOpaque),
-                      overlayColor: MaterialStateProperty.all<Color>(AppTheme.colors.primary),
-                    ),
-                    onPressed: (){
-                      Navigator.pushNamed(context, "/cadastro_user");
-                    }, 
-                    child: Text("Cadastrar-se")
-                  ),
-                ),
-              ],
-            )
+        child: Form(
+          key: formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              UserFormFieldWidget(
+                onSaved: (username){
+                  controller.getUser(username!);
+                },
+                onFieldSubmitted: (username) {
+                  if(formKey.currentState!.validate()) {
+                  controller.getUser(username);}
+                },
+              ),
+              Row(children: [Expanded(
+                child: ElevatedButtonWidget(
+                  label: "Entrar",
+                  onPressed:() {
+                    if(formKey.currentState!.validate()) {
+                    formKey.currentState!.save();}
+                  }
+                )
+              )]),
+              Row(children: [Expanded(
+                child: ElevatedButtonWidget(
+                  onPressed: () {
+                    Navigator.pushNamed(context, "/cadastro_user");
+                  },
+                  label: "Cadastrar-se",
+                  isPrimary: false,
+                )
+              )])
             ],
+          ),
         ),
       ),
     );
