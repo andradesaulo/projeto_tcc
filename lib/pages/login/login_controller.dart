@@ -1,6 +1,8 @@
+import 'package:projeto_tcc/models/user_model.dart';
 import 'package:projeto_tcc/pages/login/login_state.dart';
 import 'package:projeto_tcc/repositories/user_repository.dart';
 import 'package:projeto_tcc/repositories/user_repository_mock.dart';
+import 'package:projeto_tcc/user_inexistente_exception.dart';
 
 class LoginController{
   final UserRepository userRepository = UserRepositoryMock();
@@ -10,9 +12,9 @@ class LoginController{
   getUser(String nome) async {
     update(LoginStateLoading());
     try {
-      final user = await userRepository.getUser(nome);
+      final UserModel user = await userRepository.getUser(nome);
       update(LoginStateSuccess(user: user));
-    } catch (e) {
+    } on UserInexistenteException catch (e) {
       update(LoginStateFailure(message: e.toString()));
     }
   }

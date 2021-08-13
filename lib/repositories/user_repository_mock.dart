@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:projeto_tcc/repositories/user_repository.dart';
 import 'package:projeto_tcc/models/user_model.dart';
+import 'package:projeto_tcc/user_inexistente_exception.dart';
 
 class UserRepositoryMock extends UserRepository {
   static List<UserModel> _users = [
@@ -17,7 +20,7 @@ class UserRepositoryMock extends UserRepository {
         return user;
       }
     }
-    throw Error();
+    throw UserInexistenteException();  
   }
 
   @override

@@ -14,16 +14,21 @@ class ElevatedButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all<Color>(
-          isPrimary
-          ? AppTheme.colors.primary
-          : AppTheme.colors.primaryOpaque
+    return ElevatedButtonTheme(
+      data: ElevatedButtonThemeData(
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all<Color>(
+            isPrimary
+            ? AppTheme.colors.primary
+            : AppTheme.colors.secondary
+          ),
+          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         ),
       ),
-      onPressed: onPressed,
-      child: Text(label)
+      child: ElevatedButton(
+        onPressed: onPressed,
+        child: Text(label)
+      ),
     );
   }
 }

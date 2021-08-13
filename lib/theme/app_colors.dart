@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 abstract class AppColors {
   Color get primary;
-  Color get primaryOpaque;
+  Color get secondary;
+  Color get error;
   Color get inputBackground;
 }
 
@@ -14,5 +15,8 @@ class AppColorsDefault extends AppColors {
   Color get inputBackground => Color(0xffEDEDED);
 
   @override
-  Color get primaryOpaque => Color(0xffB080F7);
+  Color get secondary => Color(0xff985EFF);
+
+  @override
+  Color get error => Color(0xffE03D5A);
 }
