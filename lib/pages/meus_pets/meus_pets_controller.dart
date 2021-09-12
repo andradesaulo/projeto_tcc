@@ -12,7 +12,11 @@ class MeusPetsController {
     update(MeusPetsStateLoading());
     try {
       final List<AnimalModel> animais = await animalRepository.getAnimais(idUser);
-      update(MeusPetsStateSuccess(animais: animais));
+      if (animais.isEmpty) {
+        update(MeusPetsStateEmpty());
+      } else {
+        update(MeusPetsStateSuccess(animais: animais));
+      }
     } catch(e) {
       update(MeusPetsStateFailure(message: e.toString()));
     }

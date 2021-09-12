@@ -14,7 +14,7 @@ class CadastroUserStateFailure extends CadastroUserState {
 }
 
 class CadastroUserStateSuccess extends CadastroUserState {
-  final UserModel user;
+  final UserModel? user;
   CadastroUserStateSuccess({
     required this.user,
   });

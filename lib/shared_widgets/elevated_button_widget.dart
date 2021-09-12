@@ -23,11 +23,12 @@ class ElevatedButtonWidget extends StatelessWidget {
             : AppTheme.colors.secondary
           ),
           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          elevation:  MaterialStateProperty.all<double>(4),
         ),
       ),
       child: ElevatedButton(
         onPressed: onPressed,
-        child: Text(label)
+        child: Text(label, style: TextStyle(color: Colors.white),)
       ),
     );
   }

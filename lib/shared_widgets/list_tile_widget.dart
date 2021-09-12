@@ -9,6 +9,7 @@ class ListTileWidget extends StatelessWidget {
   final String? subtitle;
   final int colorId;
   final String? iconUrl;
+  final Function()? onTap;
 
   const ListTileWidget({
     Key? key,
@@ -16,70 +17,74 @@ class ListTileWidget extends StatelessWidget {
     this.subtitle,
     required this.colorId,
     this.iconUrl,
+    this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10)
-          ),
-          clipBehavior: Clip.hardEdge,
-          elevation: 2,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: Container(
-                      child: Center(
-                        child: 
-                          iconUrl != null 
-                          ? Image.asset(
-                              "assets/images/${iconUrl!}",
-                              width: 40,) 
-                          : null,
+      child: GestureDetector(
+        onTap: onTap,
+        child: Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10)
+            ),
+            clipBehavior: Clip.hardEdge,
+            elevation: 2,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: Container(
+                        child: Center(
+                          child: 
+                            iconUrl != null 
+                            ? Image.asset(
+                                "assets/images/${iconUrl!}",
+                                width: 40,) 
+                            : null,
+                        ),
+                        width: 100, 
+                        height: 72, 
+                        color: AppListTileColors.getColor(colorId)
                       ),
-                      width: 100, 
-                      height: 72, 
-                      color: AppListTileColors.getColor(colorId)
                     ),
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        title, 
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: AppTheme.colors.primary
-                        )
-                      ),
-                      SizedBox(height: 5),
-                      Text(
-                        subtitle!,
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: AppTheme.colors.secondary
-                        )
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: IconWidget(
-                  name: Icons.arrow_right_alt,
-                  color: AppTheme.colors.secondary,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          title, 
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: AppTheme.colors.primary
+                          )
+                        ),
+                        SizedBox(height: 5),
+                        Text(
+                          subtitle!,
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: AppTheme.colors.secondary
+                          )
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-              )
-            ]
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: IconWidget(
+                    name: Icons.arrow_right_alt,
+                    color: AppTheme.colors.secondary,
+                  ),
+                )
+              ]
+            ),
           ),
-        ),
+      ),
       );
   }
 }

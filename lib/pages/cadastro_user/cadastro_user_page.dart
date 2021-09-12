@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_tcc/pages/cadastro_user/cadastro_user_controller.dart';
 import 'package:projeto_tcc/pages/cadastro_user/cadastro_user_state.dart';
-import 'package:projeto_tcc/shared_widgets/drop_down_button_form_field_widget.dart';
+import 'package:projeto_tcc/shared_widgets/input_fields/drop_down_button_form_field_widget.dart';
 import 'package:projeto_tcc/shared_widgets/elevated_button_widget.dart';
 import 'package:projeto_tcc/shared_widgets/input_fields/date_form_field_widget.dart';
 import 'package:projeto_tcc/shared_widgets/input_fields/user_form_field_widget.dart';
 import 'package:projeto_tcc/theme/app_theme.dart';
 
+//TODO: usuário existente error handling
 class CadastroUserPage extends StatefulWidget {
   const CadastroUserPage({ Key? key }) : super(key: key);
 
@@ -15,7 +16,7 @@ class CadastroUserPage extends StatefulWidget {
 }
 
 class _CadastroUserPageState extends State<CadastroUserPage> {
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final CadastroUserController controller = CadastroUserController();
   String nome = "";
   DateTime? dataNasc;
@@ -24,16 +25,17 @@ class _CadastroUserPageState extends State<CadastroUserPage> {
   @override
   void initState() {
     controller.listen((state) {
-      if (controller.state is CadastroUserStateSuccess) {
-        final user = (controller.state as CadastroUserStateSuccess).user;
-        print("${user.id} + ${user.nome} + ${user.genero} + ${user.dataNasc}");
-        Navigator.pushReplacementNamed(
+      if (state is CadastroUserStateSuccess) {
+        final user = state.user;
+        print("${user!.id} + ${user.nome} + ${user.genero} + ${user.dataNasc}");
+        Navigator.pushNamedAndRemoveUntil(
           context, 
           "/meus_pets",
+          (route) => false,
           arguments: user
         );
-      } else if (controller.state is CadastroUserStateFailure) {
-        print((controller.state as CadastroUserStateFailure).message);
+      } else if (state is CadastroUserStateFailure) {
+        print(state.message);
       } else {
         setState(() {});
       }
@@ -42,7 +44,6 @@ class _CadastroUserPageState extends State<CadastroUserPage> {
   }
   @override
   Widget build(BuildContext context) {
-    print("building cadastro page");
     return Scaffold(
       appBar: AppBar(
         title: Text("Cadastre-se"),
@@ -98,7 +99,7 @@ class _CadastroUserPageState extends State<CadastroUserPage> {
                       });
                     }
                   },
-                  onFieldSubmitted: (value){
+                  onFieldSubmitted: (_){
                     if(formKey.currentState!.validate()){
                       formKey.currentState!.save();
                       controller.setAndGetUser(nome, dataNasc, genero);

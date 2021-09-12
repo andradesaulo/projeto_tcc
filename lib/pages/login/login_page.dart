@@ -20,9 +20,8 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     controller.listen((state) {
-        if (controller.state is LoginStateSuccess) {
-          final user = (controller.state as LoginStateSuccess).user;
-          // print("${user.id} + ${user.nome} + ${user.genero} + ${user.dataNasc}");
+        if (state is LoginStateSuccess) {
+          final user = state.user;
           Navigator.pushReplacementNamed(
             context, 
             "/meus_pets", 

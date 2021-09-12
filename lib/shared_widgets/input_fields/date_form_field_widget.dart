@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:projeto_tcc/services/date_text_formatter.dart';
 import 'package:projeto_tcc/shared_widgets/icon_widget.dart';
 import 'package:projeto_tcc/shared_widgets/input_fields/text_form_field_widget.dart';
@@ -20,7 +21,7 @@ class DateFormFieldWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFieldInputWidget(
+    return TextFormFieldInputWidget(
       validator: (date) {
         if(date != null && date.isNotEmpty) {
           late int day;
@@ -66,9 +67,11 @@ class DateFormFieldWidget extends StatelessWidget {
         return null;
       },
       label: "Data de nascimento",
+      hint: "dd/mm/aaaa",
+      helperText: "Insira dia, mês e ano",
       keyboardType: TextInputType.number,
       icon: IconWidget(name: Icons.event),
-      inputFormatters: [DateTextFormatter()],
+      inputFormatters: [DateTextFormatter(), FilteringTextInputFormatter.allow(RegExp('[0-9]'))],
       autovalidateMode: AutovalidateMode.onUserInteraction,
       hasIcon: hasIcon,
       onSaved: onSaved,

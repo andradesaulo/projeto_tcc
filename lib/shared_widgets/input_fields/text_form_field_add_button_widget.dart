@@ -4,14 +4,13 @@ import 'package:flutter/services.dart';
 import 'package:projeto_tcc/shared_widgets/icon_widget.dart';
 import 'package:projeto_tcc/theme/app_theme.dart';
 
-class TextFormFieldInputWidget extends StatefulWidget {
-  final bool? enabled;
+class TextFormFieldInputAddButtonWidget extends StatefulWidget {
   final String label;
   final String? hint;
   final String? helperText;
   final IconWidget? icon;
   final TextInputType? keyboardType;
-  final Function(String, TextEditingController?)? onChanged;
+  final Function(String, TextEditingController)? onChanged;
   final Function(String?)? onSaved;
   final List<TextInputFormatter>? inputFormatters;
   final TextInputAction? inputAction;
@@ -19,11 +18,9 @@ class TextFormFieldInputWidget extends StatefulWidget {
   final String? Function(String?)? validator;
   final AutovalidateMode? autovalidateMode;
   final bool hasIcon;
-  final Widget? suffixIcon;
-
-  const TextFormFieldInputWidget({
+  final Function(TextEditingController) onAdd;
+  const TextFormFieldInputAddButtonWidget({
     Key? key,
-    this.enabled = true,
     required this.label,
     this.hint,
     this.helperText,
@@ -37,14 +34,14 @@ class TextFormFieldInputWidget extends StatefulWidget {
     this.validator,
     this.autovalidateMode,
     required this.hasIcon,
-    this.suffixIcon,
+    required this.onAdd,
   }) : super(key: key);
 
   @override
-  _TextFormFieldInputWidgetState createState() => _TextFormFieldInputWidgetState();
+  _TextFormFieldInputAddButtonWidgetState createState() => _TextFormFieldInputAddButtonWidgetState();
 }
 
-class _TextFormFieldInputWidgetState extends State<TextFormFieldInputWidget> {
+class _TextFormFieldInputAddButtonWidgetState extends State<TextFormFieldInputAddButtonWidget> {
   TextEditingController textController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -52,7 +49,6 @@ class _TextFormFieldInputWidgetState extends State<TextFormFieldInputWidget> {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: TextFormField(
-        enabled: widget.enabled,
         validator: widget.validator,
         autovalidateMode: widget.autovalidateMode,
         onFieldSubmitted: widget.onFieldSubmitted,
@@ -67,7 +63,10 @@ class _TextFormFieldInputWidgetState extends State<TextFormFieldInputWidget> {
         cursorColor: AppTheme.colors.primary,
         decoration: InputDecoration(
           icon: widget.hasIcon? widget.icon : null,
-          suffixIcon: widget.suffixIcon,
+          suffixIcon: GestureDetector(
+            child: IconWidget(name: Icons.add_circle_outline),
+            onTap: () => widget.onAdd(textController)
+          ),
           labelText: widget.label,
           helperText: widget.helperText,
           helperStyle: TextStyle(

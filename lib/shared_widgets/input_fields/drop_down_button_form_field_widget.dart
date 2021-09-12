@@ -8,12 +8,16 @@ class DropDownButtonFormFieldWidget extends StatelessWidget {
   final Function(String?)? onChanged;
   final List<Map<String, String>> menuItems;
   final Function(String?)? onSaved;
+  final IconWidget? icon;
+  final String? Function(String?)? validator;
   const DropDownButtonFormFieldWidget({
     Key? key,
     required this.hintText,
-    required this.menuItems,
     required this.onChanged,
+    required this.menuItems,
     required this.onSaved,
+    this.icon,
+    this.validator,
   }) : super(key: key);
 
   @override
@@ -23,6 +27,7 @@ class DropDownButtonFormFieldWidget extends StatelessWidget {
       child: DropdownButtonFormField<String>(  
         onChanged: onChanged,
         onSaved: onSaved,
+        validator: validator,
         items: [
           DropdownMenuItem<String>(
             child: Text(hintText, 
@@ -51,9 +56,7 @@ class DropDownButtonFormFieldWidget extends StatelessWidget {
             color: AppTheme.colors.primary,
             fontSize: 14,
           ),
-          icon: IconWidget(
-            name: Icons.face
-          ),
+          icon: icon,
           fillColor: AppTheme.colors.inputBackground,
           filled: true,
           enabledBorder: UnderlineInputBorder(

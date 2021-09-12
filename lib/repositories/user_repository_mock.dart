@@ -1,11 +1,12 @@
 import 'dart:async';
 
+import 'package:projeto_tcc/exceptions/user_existente_exception.dart';
 import 'package:projeto_tcc/repositories/user_repository.dart';
 import 'package:projeto_tcc/models/user_model.dart';
-import 'package:projeto_tcc/user_inexistente_exception.dart';
+import 'package:projeto_tcc/exceptions/user_inexistente_exception.dart';
 
 class UserRepositoryMock extends UserRepository {
-  static List<UserModel> _users = [
+  static List<UserModel> users = [
     UserModel(id: 1, nome: "Saulo", dataNasc: DateTime(1997), genero: "m"),
     UserModel(id: 2, nome: "Ana", dataNasc: DateTime(1999), genero: "f"),
     UserModel(id: 3, nome: "Maria", dataNasc: DateTime(1996), genero: "f"),
@@ -13,47 +14,38 @@ class UserRepositoryMock extends UserRepository {
   ];
 
   @override
-  Future<UserModel> getUser(String nome) async {
+  Future<UserModel?> getUser(String nome) async {
     await Future.delayed(Duration(seconds: 2));
-    for (UserModel user in _users) {
+    UserModel? userExistente;
+    for (UserModel user in users) {
       if (user.nome == nome) {
-        return user;
+        userExistente = user;
+        break;
       }
     }
-    throw UserInexistenteException();  
+    if (userExistente != null) {
+      return userExistente;
+    } else {
+      throw UserInexistenteException();
+    }
   }
 
   @override
-  Future<bool> setUser(String nome, DateTime? dataNasc, String? genero) async {
-    try {
-      await Future.delayed(Duration(seconds: 2));
-      int id = 1;
-      while(true) {
-        final int idAntigo = id;
-        for (UserModel user in _users) {
-          if (user.id == id) {
-            id++;
-            break;
-          }
-        }
-        if (idAntigo == id) {
-          break;
-        }
-        continue;
+  Future<UserModel?> setAndGetUser(String nome, DateTime? dataNasc, String? genero) async {
+    await Future.delayed(Duration(seconds: 2));
+    for (UserModel user in users) {
+      if (user.nome == nome) {
+        throw UserExistenteException();
       }
-      _users.add(
-        UserModel(
-          id: id, 
-          nome: nome,
-          dataNasc: dataNasc,
-          genero: genero
-        )
-      );
-      return true;
-    } catch(e) {
-      return false;
     }
+    users.add(
+      UserModel(
+        id: users.length + 1, 
+        nome: nome,
+        dataNasc: dataNasc,
+        genero: genero
+      )
+    );
+    return users[users.length - 1];
   }
-  
-
 }

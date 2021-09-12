@@ -20,7 +20,7 @@ class UserFormFieldWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFieldInputWidget(
+    return TextFormFieldInputWidget(
       validator: (username) =>
         username!.isEmpty ? "Insira um nome de usuário" : null,
       label: "Usuário",

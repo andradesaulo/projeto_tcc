@@ -8,7 +8,7 @@ class AnimalModel {
   final String nome;
   final String sexo;
   final int? idade;
-  final List<String>? problemasSaude;
+  final String? problemasSaude;
   final double? peso;
   final double? altura;
 
