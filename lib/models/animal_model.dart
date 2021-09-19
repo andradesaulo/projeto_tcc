@@ -1,28 +1,31 @@
 
+import 'package:projeto_tcc/models/raca_model.dart';
+
 class AnimalModel {
-  final int id;
-  final int idUser;
-  final int idRaca;
-  final String nomeRaca;
-  final String tipo;
-  final String nome;
-  final String sexo;
-  final int? idade;
-  final String? problemasSaude;
-  final double? peso;
-  final double? altura;
+  int id;
+  int idUser;
+  RacaModel raca;
+  String nome;
+  String sexo;
+  int? anoNasc;
+  String? problemasSaude;
+  double? peso;
+  int? altura;
 
   AnimalModel({
     required this.id,
     required this.idUser,
-    required this.idRaca,
-    required this.nomeRaca,
-    required this.tipo,
+    required this.raca,
     required this.nome,
     required this.sexo,
-    this.idade,
-    this.problemasSaude,
-    this.peso,
-    this.altura,
+    required this.anoNasc,
+    required this.problemasSaude,
+    required this.peso,
+    required this.altura,
   });
+
+  @override
+  String toString() {
+    return "$id,$idUser,${raca.toString()},$nome,$sexo,$anoNasc,$problemasSaude,$peso,$altura";
+  }
 }

@@ -10,6 +10,7 @@ class DropDownButtonFormFieldWidget extends StatelessWidget {
   final Function(String?)? onSaved;
   final IconWidget? icon;
   final String? Function(String?)? validator;
+  final String? initialValue;
   const DropDownButtonFormFieldWidget({
     Key? key,
     required this.hintText,
@@ -18,13 +19,15 @@ class DropDownButtonFormFieldWidget extends StatelessWidget {
     required this.onSaved,
     this.icon,
     this.validator,
+    this.initialValue,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
-      child: DropdownButtonFormField<String>(  
+      child: DropdownButtonFormField<String>(
+        value: initialValue,
         onChanged: onChanged,
         onSaved: onSaved,
         validator: validator,

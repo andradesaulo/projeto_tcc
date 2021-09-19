@@ -28,12 +28,15 @@ class _MeusPetsPageState extends State<MeusPetsPage> {
         setState(() {});
       }
     });
-    WidgetsBinding.instance!.addPostFrameCallback((_){
-      final UserModel user = 
-        ModalRoute.of(context)!.settings.arguments as UserModel;
-      controller.getAnimais(user.id);
-    });
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    final UserModel user = 
+      ModalRoute.of(context)!.settings.arguments as UserModel;
+    controller.getAnimais(user.id);
+    super.didChangeDependencies();
   }
 
   String idadeFormatada(int? idade) => 
@@ -51,18 +54,22 @@ class _MeusPetsPageState extends State<MeusPetsPage> {
       ),
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(right: 10, bottom: 20),
-        child: Container(
-          width: 150,
-          height: 40,
-          child: ElevatedButtonWidget(
-            label: "Novo Pet",
-            onPressed: () {
-              final UserModel user = 
-                ModalRoute.of(context)!.settings.arguments as UserModel;
-              Navigator.pushNamed(context, "/cadastro_pet", arguments: user.id);
-            },
-          )
-        ),
+        child: ElevatedButtonWidget(
+          label: "Novo Pet",
+          onPressed: () async {
+            final UserModel user = 
+              ModalRoute.of(context)!.settings.arguments as UserModel;
+            Navigator.pushNamed(
+              context, "/cadastro-edicao_pet", 
+              arguments: {
+                "userId": user.id, 
+                "getAnimaisFunction": [() {
+                  controller.getAnimais(user.id);
+                }]
+              }
+            );
+          },
+        )
       ),
       body: Padding(
         padding: const EdgeInsets.all(10),
@@ -71,20 +78,29 @@ class _MeusPetsPageState extends State<MeusPetsPage> {
             if (controller.state is MeusPetsStateSuccess) ...[
               for (var i = 0; i < animais.length; i++) 
                 ListTileWidget(
-                  onTap: () {
+                  onTap: () { 
+                    final UserModel user = 
+                      ModalRoute.of(context)!.settings.arguments as UserModel;
                     Navigator.pushNamed(
                       context, 
                       "/pet",
-                      arguments: animais[i]
+                      arguments: {
+                        "animal": animais[i], 
+                        "getAnimaisFunction": [
+                          () {
+                            controller.getAnimais(user.id);
+                          }
+                        ]
+                      }
                     );
                   },
                   title: "${animais[i].nome}",
-                  subtitle: animais[i].idade != null 
-                      ? "${idadeFormatada(animais[i].idade)} ${animais[i].nomeRaca}"
-                      : "${animais[i].nomeRaca}",
+                  subtitle: animais[i].anoNasc != null 
+                      ? "${idadeFormatada(DateTime.now().year - animais[i].anoNasc!)} ${animais[i].raca.nome}"
+                      : "${animais[i].raca.nome}",
                   colorId: i,
                   iconUrl: 
-                    animais[i].tipo == "c" 
+                    animais[i].raca.tipo == "c" 
                     ? "dog_icon_opaque.png"
                     : "cat_icon_opaque.png",
                 )

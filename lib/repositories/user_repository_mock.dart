@@ -31,7 +31,7 @@ class UserRepositoryMock extends UserRepository {
   }
 
   @override
-  Future<UserModel?> setAndGetUser(String nome, DateTime? dataNasc, String? genero) async {
+  Future<UserModel> createAndGetUser(String nome, DateTime? dataNasc, String? genero) async {
     await Future.delayed(Duration(seconds: 2));
     for (UserModel user in users) {
       if (user.nome == nome) {

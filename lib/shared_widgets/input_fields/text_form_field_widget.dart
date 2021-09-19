@@ -7,6 +7,7 @@ import 'package:projeto_tcc/theme/app_theme.dart';
 class TextFormFieldInputWidget extends StatefulWidget {
   final bool? enabled;
   final String label;
+  final String? initialValue;
   final String? hint;
   final String? helperText;
   final IconWidget? icon;
@@ -37,7 +38,8 @@ class TextFormFieldInputWidget extends StatefulWidget {
     this.validator,
     this.autovalidateMode,
     required this.hasIcon,
-    this.suffixIcon,
+    this.suffixIcon, 
+    this.initialValue,
   }) : super(key: key);
 
   @override
@@ -45,10 +47,15 @@ class TextFormFieldInputWidget extends StatefulWidget {
 }
 
 class _TextFormFieldInputWidgetState extends State<TextFormFieldInputWidget> {
-  TextEditingController textController = TextEditingController();
+  late TextEditingController textController;
+  @override
+  void initState() {
+    textController = TextEditingController(text: widget.initialValue);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    // print("building text input");
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: TextFormField(

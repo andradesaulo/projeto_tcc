@@ -1,11 +1,16 @@
 class RacaModel {
-  final int id;
-  final String nome;
-  final String tipo;
+  int id;
+  String nome;
+  String tipo;
   
   RacaModel({
     required this.id,
     required this.nome,
     required this.tipo,
   });
+
+  @override
+  String toString() {
+    return "$id,$nome,$tipo";
+  }
 }

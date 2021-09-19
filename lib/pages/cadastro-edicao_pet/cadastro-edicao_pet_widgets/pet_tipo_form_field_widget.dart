@@ -1,34 +1,36 @@
 import 'package:flutter/material.dart';
+
 import 'package:projeto_tcc/shared_widgets/icon_widget.dart';
 import 'package:projeto_tcc/shared_widgets/input_fields/drop_down_button_form_field_widget.dart';
 
-class PetSexoFormFieldWidget extends StatelessWidget {
+class PetTipoFormFieldWidget extends StatelessWidget {
   final Function(String?)? onChanged;
   final Function(String?)? onSaved;
-  const PetSexoFormFieldWidget({
+  final String? initialValue;
+  const PetTipoFormFieldWidget({
     Key? key,
     this.onChanged,
     this.onSaved,
+    this.initialValue,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return DropDownButtonFormFieldWidget(
-      hintText: "Sexo",
+      hintText: "Tipo do animal", 
+      initialValue: initialValue,
       validator: (value) => 
         value == null 
-        ? "Insira o sexo do animal"
+        ? "Insira o tipo do animal"
         : null,
-      menuItems:[
-        {"name": "Fêmea", "value": "f"},
-        {"name": "Macho", "value": "m"},
-        {"name": "Não definido", "value": "n"}, 
-      ],
+      menuItems: [
+        {"name": "Gato", "value": "g"},
+        {"name": "Cachorro", "value": "c"},
+      ], 
       icon: IconWidget(
-        name: Icons.wc
+        name: Icons.help,
       ),
-      onChanged: onChanged ?? (value) {},
-      onSaved: onSaved,
-    );
+      onChanged: onChanged, 
+      onSaved: onSaved);
   }
 }

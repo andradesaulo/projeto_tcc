@@ -9,22 +9,24 @@ class PetNomeFormFieldWidget extends StatelessWidget {
   final Function(String)? onFieldSubmitted;
   final Function(String?) onSaved;
   final TextInputAction? inputAction;
+  final String? initialValue;
   const PetNomeFormFieldWidget({
     Key? key,
     this.onChanged,
     this.onFieldSubmitted,
     required this.onSaved,
-    this.inputAction,
+    this.inputAction, this.initialValue,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormFieldInputWidget(
       label: "Nome",
+      initialValue: initialValue,
       hasIcon: true,
       icon: IconWidget(name: Icons.loyalty),
       inputAction: inputAction,
-      // TODO: inputFormatters: [LengthLimitingTextInputFormatter(80)],
+      inputFormatters: [LengthLimitingTextInputFormatter(60)],
       onChanged: onChanged ?? (nome, controller) {},
       validator: (petName) => 
         petName!.trim().isEmpty ? "Insira o nome do seu pet" : null,

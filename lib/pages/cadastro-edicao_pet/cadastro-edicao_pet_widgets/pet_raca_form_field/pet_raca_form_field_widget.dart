@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:projeto_tcc/models/raca_model.dart';
-import 'package:projeto_tcc/pages/cadastro_pet/cadastro_pet_widgets/pet_raca_form_field/pet_raca_form_field_controller.dart';
-import 'package:projeto_tcc/pages/cadastro_pet/cadastro_pet_widgets/pet_raca_form_field/pet_raca_form_field_state.dart';
+import 'package:projeto_tcc/pages/cadastro-edicao_pet/cadastro-edicao_pet_widgets/pet_raca_form_field/pet_raca_form_field_controller.dart';
+import 'package:projeto_tcc/pages/cadastro-edicao_pet/cadastro-edicao_pet_widgets/pet_raca_form_field/pet_raca_form_field_state.dart';
 import 'package:projeto_tcc/shared_widgets/icon_widget.dart';
 import 'package:projeto_tcc/shared_widgets/input_fields/text_form_field_widget.dart';
 import 'package:projeto_tcc/theme/app_theme.dart';
@@ -15,6 +15,7 @@ class PetRacaFormFieldWidget extends StatefulWidget {
   final TextInputAction? inputAction;
   final String? tipoAnimal;
   final int? idRacaEscolhida;
+  final String? initialValue;
   const PetRacaFormFieldWidget({
     Key? key,
     this.onChanged,
@@ -24,6 +25,7 @@ class PetRacaFormFieldWidget extends StatefulWidget {
     this.inputAction,
     this.tipoAnimal,
     this.idRacaEscolhida,
+    this.initialValue,
   }) : super(key: key);
 
   @override
@@ -36,6 +38,7 @@ class _PetRacaFormFieldWidgetState extends State<PetRacaFormFieldWidget> {
   String campo = "";
   @override
   void initState() {
+    campo = widget.initialValue == null ? "" : widget.initialValue!;
     controller.listen((state){
       if (state is PetRacaFormFieldStateSuccess) {
         setState(() {
@@ -43,22 +46,30 @@ class _PetRacaFormFieldWidgetState extends State<PetRacaFormFieldWidget> {
         });
       }
     });
+    if(widget.tipoAnimal != null) {
+      controller.getRacas(widget.tipoAnimal!, campo);
+    }
     super.initState();
   }
   
+  @override
+    void didUpdateWidget(covariant PetRacaFormFieldWidget oldWidget) {
+      if(widget.tipoAnimal != null) {
+        controller.getRacas(widget.tipoAnimal!, campo);
+      } else {
+        setState(() {
+          racas = [];      
+        });
+      }
+      super.didUpdateWidget(oldWidget);
+    }
 
   @override
   Widget build(BuildContext context) {
-    if(widget.tipoAnimal != null) {
-      controller.getRacas(widget.tipoAnimal!, campo);
-    } else {
-      setState(() {
-        racas = [];      
-      });
-    }
     return Column(
       children: [
         TextFormFieldInputWidget(
+          initialValue: widget.initialValue,
           enabled: widget.tipoAnimal == null ? false : true,
           label: "Raça",
           helperText: 

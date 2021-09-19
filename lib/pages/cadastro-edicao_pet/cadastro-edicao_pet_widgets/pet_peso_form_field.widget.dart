@@ -9,12 +9,13 @@ class PetPesoFormFieldWidget extends StatelessWidget {
   final Function(String)? onFieldSubmitted;
   final Function(double?) onSaved;
   final TextInputAction? inputAction;
+  final String? initialValue;
   const PetPesoFormFieldWidget({
     Key? key,
     this.onChanged,
     this.onFieldSubmitted,
     required this.onSaved,
-    this.inputAction,
+    this.inputAction, this.initialValue,
   }) : super(key: key);
 
   void trataPeso(String peso, TextEditingController controller, {String? novoPeso}) {
@@ -28,6 +29,7 @@ class PetPesoFormFieldWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormFieldInputWidget(
       label: "Peso (kg)", 
+      initialValue: initialValue,
       hasIcon: true, 
       icon: IconWidget(name: Icons.fitness_center),
       keyboardType: TextInputType.number,

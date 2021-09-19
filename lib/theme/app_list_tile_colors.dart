@@ -8,6 +8,6 @@ class AppListTileColors {
   ];
 
   static Color getColor(int i) {
-    return colors[i];
+    return colors[i % 3];
   }
 }

@@ -10,21 +10,29 @@ class CustomExceptionWidget extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Card(
-        color: AppTheme.colors.error,
-        child: Container(
-          height: 25,
-          child: Center(
-            child: Text(
-              message,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 12
+  Widget build(BuildContext context) {          
+    return Row(
+      children: [Expanded(
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 8.0),
+            child: Card(
+                color: AppTheme.colors.error,
+                child: Container(
+                  height: 25,
+                  child: Center(
+                    child: Text(
+                      message,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 12
+                      ),
+                    ),
+                  ),
+                ),
               ),
-            ),
           ),
         ),
-      );
+      ],
+    );
   }
 }

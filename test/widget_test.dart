@@ -1,18 +1,18 @@
-import 'package:flutter_test/flutter_test.dart';
-import 'package:projeto_tcc/repositories/user_repository.dart';
-import 'package:projeto_tcc/repositories/user_repository_mock.dart';
+import 'package:projeto_tcc/models/raca_model.dart'
+import 'package:projeto_tcc/pages/cadastro_pet/cadastro-edicao_pet_controller.dart';
 
 // class HomeRepositoryMock extends Mock implements HomeRepository {}
 
 void main() {
-  final UserRepository repository = UserRepositoryMock();
+  CadastroPetController().main();
+  // final UserRepository repository = UserRepositoryMock();
 
-  test("Testando o setUsers", () async{
-    final bool result = await repository.setUser(
-      "João", DateTime.now(), "m"
-    );
-    print(result);
-    expect(result, true);
-  });
+  // test("Testando o setUsers", () async{
+  //   final bool result = await repository.setUser(
+  //     "João", DateTime.now(), "m"
+  //   );
+  //   print(result);
+  //   expect(result, true);
+  // });
 
 }

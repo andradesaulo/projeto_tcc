@@ -4,7 +4,7 @@ import 'package:projeto_tcc/pages/login/login_state.dart';
 import 'package:projeto_tcc/shared_widgets/custom_exception_widget.dart';
 import 'package:projeto_tcc/shared_widgets/elevated_button_widget.dart';
 import 'package:projeto_tcc/shared_widgets/input_fields/user_form_field_widget.dart';
-import 'package:projeto_tcc/theme/app_theme.dart';
+import 'package:projeto_tcc/shared_widgets/linear_progress_indicator_widget.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({ Key? key }) : super(key: key);
@@ -57,23 +57,12 @@ class _LoginPageState extends State<LoginPage> {
                 },
               ),
               if (controller.state is LoginStateFailure) ...[
-                Row(children: [Expanded(
-                  child: CustomExceptionWidget(
-                    message: (controller.state as LoginStateFailure).message
-                  ),
-                )]),
-                SizedBox(height: 8)
+                CustomExceptionWidget(
+                  message: (controller.state as LoginStateFailure).message
+                )
               ]
               else if (controller.state is LoginStateLoading) ...[
-                SizedBox(height: 5),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 5),
-                  child: LinearProgressIndicator(
-                    backgroundColor: Colors.grey[200],
-                    valueColor: AlwaysStoppedAnimation<Color>(AppTheme.colors.primary)
-                  ),
-                ),
-                SizedBox(height: 14)
+                LinearProgressIndicatorWidget()
               ],
               Row(children: [Expanded(
                 child: ElevatedButtonWidget(

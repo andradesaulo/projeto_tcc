@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_tcc/pages/cadastro_user/cadastro_user_controller.dart';
 import 'package:projeto_tcc/pages/cadastro_user/cadastro_user_state.dart';
+import 'package:projeto_tcc/shared_widgets/custom_exception_widget.dart';
 import 'package:projeto_tcc/shared_widgets/input_fields/drop_down_button_form_field_widget.dart';
 import 'package:projeto_tcc/shared_widgets/elevated_button_widget.dart';
 import 'package:projeto_tcc/shared_widgets/input_fields/date_form_field_widget.dart';
 import 'package:projeto_tcc/shared_widgets/input_fields/user_form_field_widget.dart';
+import 'package:projeto_tcc/shared_widgets/linear_progress_indicator_widget.dart';
 import 'package:projeto_tcc/theme/app_theme.dart';
 
-//TODO: usuário existente error handling
 class CadastroUserPage extends StatefulWidget {
   const CadastroUserPage({ Key? key }) : super(key: key);
 
@@ -36,6 +37,7 @@ class _CadastroUserPageState extends State<CadastroUserPage> {
         );
       } else if (state is CadastroUserStateFailure) {
         print(state.message);
+        setState(() {});
       } else {
         setState(() {});
       }
@@ -102,15 +104,20 @@ class _CadastroUserPageState extends State<CadastroUserPage> {
                   onFieldSubmitted: (_){
                     if(formKey.currentState!.validate()){
                       formKey.currentState!.save();
-                      controller.setAndGetUser(nome, dataNasc, genero);
+                      controller.createAndGetUser(nome, dataNasc, genero);
                     }
                   },
                 ),
+                if (controller.state is CadastroUserStateLoading) ...[
+                  LinearProgressIndicatorWidget(),
+                ] else if (controller.state is CadastroUserStateFailure) ...[
+                  CustomExceptionWidget(message: (controller.state as CadastroUserStateFailure).message)
+                ],
                 ElevatedButtonWidget(
                   onPressed: (){
                     if(formKey.currentState!.validate()){
                       formKey.currentState!.save();
-                      controller.setAndGetUser(nome, dataNasc, genero);
+                      controller.createAndGetUser(nome, dataNasc, genero);
                     }
                   }, 
                   label: "Cadastrar",

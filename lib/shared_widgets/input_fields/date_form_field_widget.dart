@@ -71,7 +71,7 @@ class DateFormFieldWidget extends StatelessWidget {
       helperText: "Insira dia, mês e ano",
       keyboardType: TextInputType.number,
       icon: IconWidget(name: Icons.event),
-      inputFormatters: [DateTextFormatter(), FilteringTextInputFormatter.allow(RegExp('[0-9]'))],
+      inputFormatters: [FilteringTextInputFormatter.allow(RegExp('[0-9]')), DateTextFormatter(), ],
       autovalidateMode: AutovalidateMode.onUserInteraction,
       hasIcon: hasIcon,
       onSaved: onSaved,
