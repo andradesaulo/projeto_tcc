@@ -17,7 +17,7 @@ class IconWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Icon(
       name,
-      color: color ?? AppTheme.colors.primary,
+      color: color ?? AppTheme.colors.iconWidget,
       size: size,
     );
   }

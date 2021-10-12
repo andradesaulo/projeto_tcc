@@ -5,7 +5,8 @@ import 'package:projeto_tcc/shared_widgets/custom_exception_widget.dart';
 import 'package:projeto_tcc/shared_widgets/input_fields/drop_down_button_form_field_widget.dart';
 import 'package:projeto_tcc/shared_widgets/elevated_button_widget.dart';
 import 'package:projeto_tcc/shared_widgets/input_fields/date_form_field_widget.dart';
-import 'package:projeto_tcc/shared_widgets/input_fields/user_form_field_widget.dart';
+import 'package:projeto_tcc/pages/cadastro_user/cadastro_user_widgets/user_name_form_field_widget.dart';
+import 'package:projeto_tcc/pages/cadastro_user/cadastro_user_widgets/user_gender_form_field_widget.dart';
 import 'package:projeto_tcc/shared_widgets/linear_progress_indicator_widget.dart';
 import 'package:projeto_tcc/theme/app_theme.dart';
 
@@ -50,7 +51,7 @@ class _CadastroUserPageState extends State<CadastroUserPage> {
       appBar: AppBar(
         title: Text("Cadastre-se"),
         centerTitle: true,
-        backgroundColor: AppTheme.colors.primary,
+        backgroundColor: AppTheme.colors.appBarBackground,
       ),
       body: Padding(
         padding: const EdgeInsets.only(
@@ -63,27 +64,21 @@ class _CadastroUserPageState extends State<CadastroUserPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                UserFormFieldWidget(
-                  inputAction: TextInputAction.next,
+                UserNameFormFieldWidget(
                   hasIcon: true,
+                  inputAction: TextInputAction.next,
                   onSaved: (value) {
                     setState(() {
                       nome = value!;
                     });
                   },
                 ),
-                DropDownButtonFormFieldWidget(
-                  hintText: "Gênero", 
+                UserGenderFormFieldWidget(
                   onSaved: (value) {
                     setState(() {
                       genero = value;
                     });
                   },
-                  menuItems: [
-                    {"name": "Feminino", "value": "f"},
-                    {"name": "Masculino", "value": "m"},
-                    {"name": "Outro", "value": "o"}
-                  ],
                   onChanged: (value){
                     FocusScope.of(context).nextFocus();
                   },

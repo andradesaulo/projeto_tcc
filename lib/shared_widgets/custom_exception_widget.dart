@@ -23,7 +23,7 @@ class CustomExceptionWidget extends StatelessWidget {
                     child: Text(
                       message,
                       style: TextStyle(
-                        color: Colors.white,
+                        color: AppTheme.colors.errorText,
                         fontSize: 12
                       ),
                     ),

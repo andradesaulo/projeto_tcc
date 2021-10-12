@@ -1,7 +1,7 @@
 import 'package:projeto_tcc/models/raca_model.dart';
 import 'package:projeto_tcc/pages/cadastro-edicao_pet/cadastro-edicao_pet_widgets/pet_raca_form_field/pet_raca_form_field_state.dart';
 import 'package:projeto_tcc/repositories/raca_repository.dart';
-import 'package:projeto_tcc/repositories/raca_repository_mock.dart';
+import 'package:projeto_tcc/repositories/raca_repository_sqlite.dart';
 
 class PetRacaFormFieldController {
   final RacaRepository racaRepository = RacaRepositoryMock();

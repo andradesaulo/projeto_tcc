@@ -103,7 +103,7 @@ class _CadastroEdicaoPetPageState extends State<CadastroEdicaoPetPage> {
       appBar: AppBar(
         title: operacao == "editar" ? Text("Editar Pet") : Text("Cadastrar Pet"),
         centerTitle: true,
-        backgroundColor: AppTheme.colors.primary,
+        backgroundColor: AppTheme.colors.appBarBackground,
       ),
       body: Padding(
         padding: const EdgeInsets.only(
@@ -211,7 +211,7 @@ class _CadastroEdicaoPetPageState extends State<CadastroEdicaoPetPage> {
                                 } else {
                                   msgErro = "";
                                   formKey.currentState!.save();
-                                  controller.setAnimal(idAnimal: idAnimal!, idUser: idUser!, idRaca: idRacaEscolhida!, nome: nome!, sexo: sexo!, anoNasc: anoNasc, problemasSaude: problemas.isEmpty ? null : problemas.join(","), peso: peso, altura: altura);
+                                  controller.setAndGetAnimal(idAnimal: idAnimal!, idUser: idUser!, idRaca: idRacaEscolhida!, nome: nome!, sexo: sexo!, anoNasc: anoNasc, problemasSaude: problemas.isEmpty ? null : problemas.join(","), peso: peso, altura: altura);
                                 }
                               }
                             },

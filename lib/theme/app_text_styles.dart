@@ -9,13 +9,13 @@ abstract class AppTextStyles {
 class AppTextStylesDefault implements AppTextStyles {
   @override
   TextStyle get titleInfoPet => TextStyle(
-    color: AppTheme.colors.primary,
+    color: AppTheme.colors.tertiary,
     fontSize: 18,
   );
 
   @override
   TextStyle get textInfoPet => TextStyle(
-    color: Colors.black,
+    color: AppTheme.colors.primary,
     fontSize: 18,
   );
   

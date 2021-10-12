@@ -20,10 +20,14 @@ class ElevatedButtonWidget extends StatelessWidget {
       child: ElevatedButtonTheme(
         data: ElevatedButtonThemeData(
           style: ButtonStyle(
+            // side: isPrimary ? null : MaterialStateProperty.all(BorderSide(
+            //   color: AppTheme.colors.tertiary,
+            //   width: 2
+            // )),
             backgroundColor: MaterialStateProperty.all<Color>(
               isPrimary
-              ? AppTheme.colors.primary
-              : AppTheme.colors.secondary
+              ? AppTheme.colors.elevatedBtnPrimary
+              : AppTheme.colors.elevatedBtnSecondary
             ),
             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
             elevation:  MaterialStateProperty.all<double>(4),
@@ -31,7 +35,7 @@ class ElevatedButtonWidget extends StatelessWidget {
         ),
         child: ElevatedButton(
           onPressed: onPressed,
-          child: Text(label, style: TextStyle(color: Colors.white),)
+          child: Text(label, style: TextStyle(color: isPrimary ? AppTheme.colors.elevatedBtnTextPrimary : AppTheme.colors.elevatedBtnTextSecondary),)
         ),
       ),
     );

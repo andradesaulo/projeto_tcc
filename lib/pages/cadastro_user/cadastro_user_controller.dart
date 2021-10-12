@@ -1,7 +1,7 @@
-import 'package:projeto_tcc/exceptions/user_existente_exception.dart';
 import 'package:projeto_tcc/models/user_model.dart';
 import 'package:projeto_tcc/repositories/user_repository.dart';
-import 'package:projeto_tcc/repositories/user_repository_mock.dart';
+import 'package:projeto_tcc/repositories/user_repository_sqlite.dart';
+import 'package:sqflite/sqflite.dart';
 import 'cadastro_user_state.dart';
 
 class CadastroUserController {
@@ -14,10 +14,12 @@ class CadastroUserController {
     try {
       final UserModel user = await userRepository.createAndGetUser(nome, dataNasc, genero);
       update(CadastroUserStateSuccess(user: user));
-    } on UserExistenteException catch (e){
-      update(CadastroUserStateFailure(message: e.toString()));
+    } on DatabaseException catch (e){
+      if (e.isUniqueConstraintError()) {
+        update(CadastroUserStateFailure(message: "Usuário já existente"));
+      }
     } catch (e) {
-      update(CadastroUserStateFailure(message: e.toString()));
+      update(CadastroUserStateFailure(message: "Erro no banco de dados"));
     }
   }
 

@@ -60,7 +60,7 @@ class _TextFormFieldInputAddButtonWidgetState extends State<TextFormFieldInputAd
         onChanged: widget.onChanged == null
         ? (value) {}
         : (value) => widget.onChanged!(value, textController),
-        cursorColor: AppTheme.colors.primary,
+        cursorColor: AppTheme.colors.inputCursor,
         decoration: InputDecoration(
           icon: widget.hasIcon? widget.icon : null,
           suffixIcon: GestureDetector(
@@ -70,30 +70,30 @@ class _TextFormFieldInputAddButtonWidgetState extends State<TextFormFieldInputAd
           labelText: widget.label,
           helperText: widget.helperText,
           helperStyle: TextStyle(
-            color: AppTheme.colors.primary
+            color: AppTheme.colors.inputHelper
           ),
           hintText: widget.hint,
           labelStyle: TextStyle(
-            color: AppTheme.colors.primary,
+            color: AppTheme.colors.inputLabel,
             fontSize: 14,
           ),
           fillColor: AppTheme.colors.inputBackground,
           filled: true,
           enabledBorder: UnderlineInputBorder(
             borderSide: BorderSide(
-              color: AppTheme.colors.primary,
+              color: AppTheme.colors.inputBorderEnabled,
               width: 2,
             )
           ),
           focusedBorder: UnderlineInputBorder(
             borderSide: BorderSide(
-              color: AppTheme.colors.primary,
+              color: AppTheme.colors.inputBorderFocused,
               width: 2,
             )
           ),
           errorBorder: UnderlineInputBorder(
             borderSide: BorderSide(
-              color: AppTheme.colors.error,
+              color: AppTheme.colors.inputBorderError,
               width: 2
             )
           )

@@ -3,8 +3,9 @@ import 'package:projeto_tcc/pages/login/login_controller.dart';
 import 'package:projeto_tcc/pages/login/login_state.dart';
 import 'package:projeto_tcc/shared_widgets/custom_exception_widget.dart';
 import 'package:projeto_tcc/shared_widgets/elevated_button_widget.dart';
-import 'package:projeto_tcc/shared_widgets/input_fields/user_form_field_widget.dart';
+import 'package:projeto_tcc/pages/cadastro_user/cadastro_user_widgets/user_name_form_field_widget.dart';
 import 'package:projeto_tcc/shared_widgets/linear_progress_indicator_widget.dart';
+import 'package:projeto_tcc/theme/app_theme.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({ Key? key }) : super(key: key);
@@ -21,6 +22,7 @@ class _LoginPageState extends State<LoginPage> {
   void initState() {
     controller.listen((state) {
         if (state is LoginStateSuccess) {
+          setState(() {});
           final user = state.user;
           Navigator.pushReplacementNamed(
             context, 
@@ -39,6 +41,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // backgroundColor: AppTheme.colors.quaternary,
       //TODO: Falta a logo
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 50),
@@ -47,7 +50,8 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              UserFormFieldWidget(
+              UserNameFormFieldWidget(
+                hasIcon: false,
                 onSaved: (username){
                   controller.getUser(username!);
                 },

@@ -10,8 +10,8 @@ class LinearProgressIndicatorWidget extends StatelessWidget {
     Padding(
       padding: const EdgeInsets.symmetric(horizontal: 5),
       child: LinearProgressIndicator(
-        backgroundColor: Colors.grey[200],
-        valueColor: AlwaysStoppedAnimation<Color>(AppTheme.colors.primary)
+        backgroundColor: AppTheme.colors.linearProgressIndicatorBackground,
+        valueColor: AlwaysStoppedAnimation<Color>(AppTheme.colors.linearProgressIndicator)
       ),
     ),
     SizedBox(height: 14)]);

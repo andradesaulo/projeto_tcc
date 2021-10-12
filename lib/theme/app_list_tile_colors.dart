@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:projeto_tcc/theme/app_theme.dart';
 
 class AppListTileColors {
   static final List<Color> colors = [
-    Color(0xffFAE4B3),
-    Color(0xffC1F4AC),
-    Color(0xffC9EDEB),
+    AppTheme.colors.tertiaryOpaque,
+    AppTheme.colors.quaternaryOpaque,
+    AppTheme.colors.quinaryOpaque,
   ];
 
   static Color getColor(int i) {

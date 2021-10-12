@@ -1,7 +1,7 @@
 import 'package:projeto_tcc/models/animal_model.dart';
 import 'package:projeto_tcc/pages/meus_pets/meus_pets_state.dart';
 import 'package:projeto_tcc/repositories/animal_repository.dart';
-import 'package:projeto_tcc/repositories/animal_repository_mock.dart';
+import 'package:projeto_tcc/repositories/animal_repository_sqlite.dart';
 
 class MeusPetsController {
   final AnimalRepository animalRepository = AnimalRepositoryMock();

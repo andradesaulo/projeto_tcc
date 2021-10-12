@@ -59,7 +59,7 @@ class ListTileWidget extends StatelessWidget {
                           title, 
                           style: TextStyle(
                             fontSize: 16,
-                            color: AppTheme.colors.primary
+                            color: AppTheme.colors.listTileTitle
                           )
                         ),
                         SizedBox(height: 5),
@@ -67,7 +67,7 @@ class ListTileWidget extends StatelessWidget {
                           subtitle!,
                           style: TextStyle(
                             fontSize: 14,
-                            color: AppTheme.colors.secondary
+                            color: AppTheme.colors.listTileSubtitle
                           )
                         ),
                       ],
@@ -78,7 +78,7 @@ class ListTileWidget extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: IconWidget(
                     name: Icons.arrow_right_alt,
-                    color: AppTheme.colors.secondary,
+                    color: AppTheme.colors.listTileArrow,
                   ),
                 )
               ]

@@ -50,7 +50,7 @@ class _MeusPetsPageState extends State<MeusPetsPage> {
       appBar: AppBar(
         title: Text("Meus Pets"),
         centerTitle: true,
-        backgroundColor: AppTheme.colors.primary,
+        backgroundColor: AppTheme.colors.appBarBackground,
       ),
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(right: 10, bottom: 20),

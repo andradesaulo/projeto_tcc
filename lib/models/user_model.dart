@@ -10,4 +10,15 @@ class UserModel {
     this.dataNasc,
     this.genero,
   });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id_usuario': id,
+      'nome': nome,
+      'data_nasc': dataNasc,
+      'genero': genero,
+    };
+  }
+
+  
 }

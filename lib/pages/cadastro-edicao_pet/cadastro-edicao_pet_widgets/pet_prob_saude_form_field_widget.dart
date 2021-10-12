@@ -98,10 +98,10 @@ class PetProbSaudeFormFieldWidget extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(right: 10),
                   child: Chip(
-                    label: Text(problema.value, style: TextStyle(color: Colors.white)),
-                    deleteIcon: IconWidget(name: Icons.highlight_remove, color: Colors.white),
+                    label: Text(problema.value, style: TextStyle(color: AppTheme.colors.probSaudeText)),
+                    deleteIcon: IconWidget(name: Icons.highlight_remove, color: AppTheme.colors.probSaudeDeleteIcon),
                     onDeleted: () => onProblemaDeleted(problema.key),
-                    backgroundColor: AppTheme.colors.primary,
+                    backgroundColor: AppTheme.colors.probSaudeBackground,
                   ),
                 )
               )

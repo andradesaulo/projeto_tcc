@@ -35,7 +35,7 @@ class DropDownButtonFormFieldWidget extends StatelessWidget {
           DropdownMenuItem<String>(
             child: Text(hintText, 
               style: TextStyle(
-                color: AppTheme.colors.primary
+                color: AppTheme.colors.dropdownMenuItemText
               )
             ), 
             value: null
@@ -56,7 +56,7 @@ class DropDownButtonFormFieldWidget extends StatelessWidget {
         decoration: InputDecoration(
           hintText: hintText,
           hintStyle: TextStyle(
-            color: AppTheme.colors.primary,
+            color: AppTheme.colors.inputHint,
             fontSize: 14,
           ),
           icon: icon,
@@ -64,13 +64,13 @@ class DropDownButtonFormFieldWidget extends StatelessWidget {
           filled: true,
           enabledBorder: UnderlineInputBorder(
             borderSide: BorderSide(
-              color: AppTheme.colors.primary,
+              color: AppTheme.colors.inputBorderEnabled,
               width: 2,
             )
           ),
           focusedBorder: UnderlineInputBorder(
             borderSide: BorderSide(
-              color: AppTheme.colors.primary,
+              color: AppTheme.colors.inputBorderFocused,
               width: 2,
             )
           ),
